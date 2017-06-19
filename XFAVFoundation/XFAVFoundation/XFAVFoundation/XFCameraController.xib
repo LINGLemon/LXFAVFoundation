@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QXCameraController">
+            <connections>
+                <outlet property="cancelButton" destination="t5x-fn-77d" id="sHN-Lx-9Lh"/>
+                <outlet property="closeButton" destination="pjC-ZM-eD4" id="Ojd-nv-wN0"/>
+                <outlet property="confirmButton" destination="q3i-Ao-Rf9" id="ald-El-Az5"/>
+                <outlet property="focusImageView" destination="cDi-p1-6Ox" id="XV1-1E-oXu"/>
+                <outlet property="rotateCameraButton" destination="Gww-tC-G56" id="7T0-7W-Hy1"/>
+                <outlet property="takeButton" destination="VBb-wh-QTG" id="9TQ-RR-Fqj"/>
+                <outlet property="tipLabel" destination="eSc-bP-yDA" id="qwh-94-ix8"/>
+                <outlet property="view" destination="Rcc-g1-Gwv" id="ghA-gY-bGN"/>
+                <outlet property="viewContainer" destination="Rcc-g1-Gwv" id="5Kf-Ym-SqA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Rcc-g1-Gwv">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBb-wh-QTG">
+                    <rect key="frame" x="127.5" y="511" width="120" height="120"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="6Vq-pe-KiW"/>
+                        <constraint firstAttribute="height" constant="120" id="Vo0-Cg-m6S"/>
+                    </constraints>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjC-ZM-eD4">
+                    <rect key="frame" x="54.5" y="555" width="33" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="取消"/>
+                    <connections>
+                        <action selector="closeBtnFunc:" destination="-1" eventType="touchUpInside" id="f7I-lc-uNy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-tC-G56">
+                    <rect key="frame" x="297.5" y="560" width="26" height="22"/>
+                    <state key="normal" image="icon_change"/>
+                    <connections>
+                        <action selector="rotateCameraBtnFunc:" destination="-1" eventType="touchUpInside" id="Lwn-B8-vHA"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击拍照，长按摄像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSc-bP-yDA">
+                    <rect key="frame" x="122.5" y="484" width="129" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sight_video_focus" translatesAutoresizingMaskIntoConstraints="NO" id="cDi-p1-6Ox">
+                    <rect key="frame" x="157" y="303" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5x-fn-77d">
+                    <rect key="frame" x="40" y="531" width="76" height="76"/>
+                    <state key="normal" image="icon_return_n"/>
+                    <state key="highlighted" image="icon_return_p"/>
+                    <connections>
+                        <action selector="cancelBtnfunc:" destination="-1" eventType="touchUpInside" id="OR6-5Y-0Kl"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3i-Ao-Rf9">
+                    <rect key="frame" x="259" y="531" width="76" height="76"/>
+                    <state key="normal" image="icon_finish_p"/>
+                    <connections>
+                        <action selector="confirmBtnFunc:" destination="-1" eventType="touchUpInside" id="wIP-aa-UUf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <constraints>
+                <constraint firstItem="Gww-tC-G56" firstAttribute="leading" secondItem="VBb-wh-QTG" secondAttribute="trailing" constant="50" id="5YP-gE-nk4"/>
+                <constraint firstAttribute="bottom" secondItem="q3i-Ao-Rf9" secondAttribute="bottom" constant="60" id="7mE-lr-tsA"/>
+                <constraint firstItem="t5x-fn-77d" firstAttribute="leading" secondItem="Rcc-g1-Gwv" secondAttribute="leading" constant="40" id="8K4-nl-leS"/>
+                <constraint firstAttribute="bottom" secondItem="VBb-wh-QTG" secondAttribute="bottom" constant="36" id="CaZ-uQ-hRv"/>
+                <constraint firstAttribute="bottom" secondItem="t5x-fn-77d" secondAttribute="bottom" constant="60" id="GCx-2F-ur9"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="centerX" secondItem="eSc-bP-yDA" secondAttribute="centerX" id="T8h-f0-n73"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="centerY" secondItem="Gww-tC-G56" secondAttribute="centerY" id="Un0-4d-Flg"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="top" secondItem="eSc-bP-yDA" secondAttribute="bottom" constant="10" id="dAy-aj-jwJ"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="centerX" secondItem="Rcc-g1-Gwv" secondAttribute="centerX" id="h90-Ju-sbR"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="leading" secondItem="pjC-ZM-eD4" secondAttribute="trailing" constant="40" id="kKG-aY-rY5"/>
+                <constraint firstItem="VBb-wh-QTG" firstAttribute="centerY" secondItem="pjC-ZM-eD4" secondAttribute="centerY" id="lFa-Se-NKA"/>
+                <constraint firstAttribute="trailing" secondItem="q3i-Ao-Rf9" secondAttribute="trailing" constant="40" id="seU-jH-g83"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-99.5" y="20.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_change" width="26" height="20"/>
+        <image name="icon_finish_p" width="76" height="76"/>
+        <image name="icon_return_n" width="76" height="76"/>
+        <image name="icon_return_p" width="76" height="76"/>
+        <image name="sight_video_focus" width="66" height="66"/>
+    </resources>
+</document>
