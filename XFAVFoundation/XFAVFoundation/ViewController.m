@@ -34,7 +34,7 @@
         NSLog(@"takePhotosCompletionBlock");
     };
     
-    cameraController.shootCompletionBlock = ^(NSURL *vedioUrl, UIImage *thumbnailImage, NSError *error) {
+    cameraController.shootCompletionBlock = ^(NSURL *videoUrl, CGFloat videoTimeLength, UIImage *thumbnailImage, NSError *error) {
         NSLog(@"shootCompletionBlock");
     };
     
