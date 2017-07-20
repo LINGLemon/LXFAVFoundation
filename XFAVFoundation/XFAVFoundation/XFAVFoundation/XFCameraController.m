@@ -725,7 +725,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 {
     self.cameraButton.progressPercentage = 0.0f;
     [self.cameraButton stopShootAnimation];
-    [self.cameraButton setHidden:YES];
     _isShooting = NO;
     [self timerStop];
     
