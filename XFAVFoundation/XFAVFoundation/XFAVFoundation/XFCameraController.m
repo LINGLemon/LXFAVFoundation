@@ -106,16 +106,24 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     _canWrite = NO;
     _beginGestureScale = 1.0f;
     _effectiveScale = 1.0f;
-    
-//    [self.tipLabel setText:[QXInternationalControl getStringByKey:@"QX_ShootTips"]];
-//    [self.closeButton setTitle:[QXInternationalControl getStringByKey:@"QX_Cancel"] forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self requestAuthorizationForVideo];
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
+        [self requestAuthorizationForVideo];
+    }
+    
+    //判断用户是否允许访问麦克风权限
+    authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
+        [self requestAuthorizationForVideo];
+    }
     [self requestAuthorizationForPhotoLibrary];
     
     [self initAVCaptureSession];
@@ -1289,10 +1297,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
  */
 - (void)addTapGenstureRecognizerForCamera
 {
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen:)];
-    
-    [self.viewContainer addGestureRecognizer:tapGesture];
-    
     UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     
     pinchGesture.delegate = self;
@@ -1303,14 +1307,23 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 /**
  *  点击屏幕，聚焦事件
  */
-- (void)tapScreen:(UITapGestureRecognizer *)tapGesture
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (_isFocusing)
+    // 不聚焦的情况：聚焦中，旋转摄像头中，查看录制的视频中，查看照片中
+    if (_isFocusing || touches.count == 0 || _isRotatingCamera || _videoPreviewContainerView || _photoPreviewImageView)
     {
         return;
     }
     
-    CGPoint point = [tapGesture locationInView:self.viewContainer];
+    UITouch *touch = nil;
+    
+    for (UITouch *t in touches)
+    {
+        touch = t;
+        break;
+    }
+    
+    CGPoint point = [touch locationInView:self.viewContainer];;
     
     if (point.y > CGRectGetMaxY(self.tipLabel.frame))
     {
