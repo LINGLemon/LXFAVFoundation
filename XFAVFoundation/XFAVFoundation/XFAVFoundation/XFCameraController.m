@@ -783,15 +783,15 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     
     // 码率和帧率设置
     NSDictionary *compressionProperties = @{ AVVideoAverageBitRateKey : @(bitsPerSecond),
-                                             AVVideoExpectedSourceFrameRateKey : @(15),
+                                             AVVideoExpectedSourceFrameRateKey : @(30),
                                              AVVideoMaxKeyFrameIntervalKey : @(15),
                                              AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel };
     
     //视频属性
     self.videoCompressionSettings = @{ AVVideoCodecKey : AVVideoCodecH264,
                                        AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill,
-                                       AVVideoWidthKey : @(kScreenHeight * 2),
-                                       AVVideoHeightKey : @(kScreenWidth * 2),
+                                       AVVideoWidthKey : @(kScreenHeight * 3),
+                                       AVVideoHeightKey : @(kScreenWidth * 3),
                                        AVVideoCompressionPropertiesKey : compressionProperties };
     
     _assetWriterVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:self.videoCompressionSettings];
