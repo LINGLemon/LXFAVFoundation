@@ -809,8 +809,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     //视频属性
     self.videoCompressionSettings = @{ AVVideoCodecKey : AVVideoCodecH264,
                                        AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill,
-                                       AVVideoWidthKey : @(kScreenHeight * 3),
-                                       AVVideoHeightKey : @(kScreenWidth * 3),
+                                       AVVideoWidthKey : @(kScreenHeight * 2),
+                                       AVVideoHeightKey : @(kScreenWidth * 2),
                                        AVVideoCompressionPropertiesKey : compressionProperties };
     
     _assetWriterVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:self.videoCompressionSettings];
