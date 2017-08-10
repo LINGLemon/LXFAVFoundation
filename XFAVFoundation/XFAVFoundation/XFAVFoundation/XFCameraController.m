@@ -1009,7 +1009,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     self.videoPreviewContainerView.backgroundColor = [UIColor blackColor];
     
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    self.player = [[AVPlayer alloc]initWithPlayerItem:_playerItem];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:_playerItem];
     
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
