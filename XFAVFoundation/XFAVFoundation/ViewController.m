@@ -30,12 +30,18 @@
 {
     XFCameraController *cameraController = [XFCameraController defaultCameraController];
     
+    __weak XFCameraController *weakCameraController = cameraController;
+    
     cameraController.takePhotosCompletionBlock = ^(UIImage *image, NSError *error) {
         NSLog(@"takePhotosCompletionBlock");
+        
+        [weakCameraController dismissViewControllerAnimated:YES completion:nil];
     };
     
     cameraController.shootCompletionBlock = ^(NSURL *videoUrl, CGFloat videoTimeLength, UIImage *thumbnailImage, NSError *error) {
         NSLog(@"shootCompletionBlock");
+        
+        [weakCameraController dismissViewControllerAnimated:YES completion:nil];
     };
     
     [self presentViewController:cameraController animated:YES completion:nil];
