@@ -797,12 +797,12 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     //写入视频大小
     NSInteger numPixels = kScreenWidth * kScreenHeight;
     //每像素比特
-    CGFloat bitsPerPixel = 6.0;
+    CGFloat bitsPerPixel = 12.0;
     NSInteger bitsPerSecond = numPixels * bitsPerPixel;
     
     // 码率和帧率设置
     NSDictionary *compressionProperties = @{ AVVideoAverageBitRateKey : @(bitsPerSecond),
-                                             AVVideoExpectedSourceFrameRateKey : @(30),
+                                             AVVideoExpectedSourceFrameRateKey : @(15),
                                              AVVideoMaxKeyFrameIntervalKey : @(15),
                                              AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel };
     
