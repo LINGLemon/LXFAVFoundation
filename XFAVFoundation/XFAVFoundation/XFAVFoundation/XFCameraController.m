@@ -12,6 +12,7 @@
 #import "XFCameraButton.h"
 #import "XFPhotoLibraryManager.h"
 #import <Photos/Photos.h>
+#import <CoreMotion/CoreMotion.h>
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -73,6 +74,9 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
 @property (assign, nonatomic) CGFloat currentVideoTimeLength;                             //当前小视频总时长
+
+@property (assign, nonatomic) UIDeviceOrientation shootingOrientation;                 //拍摄中的手机方向
+@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @end
 
@@ -161,6 +165,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [super viewDidDisappear:animated];
     
     [self stopSession];
+    
+    [self stopUpdateAccelerometer];
 }
 
 - (void)dealloc
@@ -330,6 +336,15 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     return _videoQueue;
 }
 
+- (CMMotionManager *)motionManager
+{
+    if (!_motionManager)
+    {
+        _motionManager = [[CMMotionManager alloc] init];
+    }
+    return _motionManager;
+}
+
 #pragma mark - 私有方法
 
 /**
@@ -443,7 +458,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     CALayer *layer = self.viewContainer.layer;
     
     _captureVideoPreviewLayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    _captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;           //填充模式
+    _captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;           //填充模式
     
     [layer addSublayer:_captureVideoPreviewLayer];
 }
@@ -548,6 +563,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self.view bringSubviewToFront:self.focusImageView];
     [self.focusImageView setAlpha:0];
     
+    // 监听屏幕方向
+    [self startUpdateAccelerometer];
 }
 
 /**
@@ -709,6 +726,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 {
     _isShooting = YES;
     
+    [self stopUpdateAccelerometer];
+    
     [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
     
     [self.cameraButton startShootAnimationWithDuration:START_VIDEO_ANIMATION_DURATION];
@@ -797,7 +816,23 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     _assetWriterVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:self.videoCompressionSettings];
     //expectsMediaDataInRealTime 必须设为yes，需要从capture session 实时获取数据
     _assetWriterVideoInput.expectsMediaDataInRealTime = YES;
-    _assetWriterVideoInput.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
+    
+    if (self.shootingOrientation == UIDeviceOrientationLandscapeRight)
+    {
+        _assetWriterVideoInput.transform = CGAffineTransformMakeRotation(M_PI);
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationLandscapeLeft)
+    {
+        _assetWriterVideoInput.transform = CGAffineTransformMakeRotation(0);
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationPortraitUpsideDown)
+    {
+        _assetWriterVideoInput.transform = CGAffineTransformMakeRotation(M_PI + (M_PI / 2.0));
+    }
+    else
+    {
+        _assetWriterVideoInput.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
+    }
     
     // 音频设置
     self.audioCompressionSettings = @{ AVEncoderBitRatePerChannelKey : @(28000),
@@ -971,13 +1006,14 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     // 初始化AVPlayer
     self.videoPreviewContainerView = [[UIView alloc] init];
     self.videoPreviewContainerView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    self.videoPreviewContainerView.backgroundColor = [UIColor blackColor];
     
     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
     self.player = [[AVPlayer alloc]initWithPlayerItem:_playerItem];
     
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
-    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     
     [self.videoPreviewContainerView.layer addSublayer:self.playerLayer];
     
@@ -1033,7 +1069,23 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     UIImage *image = [UIImage imageWithCGImage:cgImage];
     CGImageRelease(cgImage);
     
-    UIImage *finalImage = [self rotateImage:image withOrientation:UIImageOrientationRight];
+    UIImage *finalImage = nil;
+    if (self.shootingOrientation == UIDeviceOrientationLandscapeRight)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationDown];
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationLandscapeLeft)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationUp];
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationPortraitUpsideDown)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationLeft];
+    }
+    else
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationRight];
+    }
     
     return finalImage;
 }
@@ -1453,6 +1505,67 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     }
     
     return YES;
+}
+
+#pragma mark - 重力感应相关
+
+/**
+ *  开始监听屏幕方向
+ */
+- (void)startUpdateAccelerometer
+{
+    if ([self.motionManager isAccelerometerAvailable] == YES)
+    {
+        //回调会一直调用,建议获取到就调用下面的停止方法，需要再重新开始，当然如果需求是实时不间断的话可以等离开页面之后再stop
+        [self.motionManager setAccelerometerUpdateInterval:1.0];
+        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error)
+         {
+             double x = accelerometerData.acceleration.x;
+             double y = accelerometerData.acceleration.y;
+             if (fabs(y) >= fabs(x))
+             {
+                 if (y >= 0)
+                 {
+                     // Down
+                     NSLog(@"Down");
+                     _shootingOrientation = UIDeviceOrientationPortraitUpsideDown;
+                 }
+                 else
+                 {
+                     // Portrait
+                     NSLog(@"Portrait");
+                     _shootingOrientation = UIDeviceOrientationPortrait;
+                 }
+             }
+             else
+             {
+                 if (x >= 0)
+                 {
+                     // Right
+                     NSLog(@"Right");
+                     _shootingOrientation = UIDeviceOrientationLandscapeRight;
+                 }
+                 else
+                 {
+                     // Left
+                     NSLog(@"Left");
+                     _shootingOrientation = UIDeviceOrientationLandscapeLeft;
+                 }
+             }
+         }];
+    }
+}
+
+/**
+ *  停止监听屏幕方向
+ */
+- (void)stopUpdateAccelerometer
+{
+    if ([self.motionManager isAccelerometerActive] == YES)
+    {
+        [self.motionManager stopAccelerometerUpdates];
+        _motionManager = nil;
+    }
 }
 
 #pragma mark - 判断是否有权限
