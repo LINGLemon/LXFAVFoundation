@@ -604,10 +604,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     {
         if ([camera position] == position)
         {
-            //            [camera lockForConfiguration:nil];
-            //            [camera setFlashMode:AVCaptureFlashModeOff];      //5s机型会崩溃
-            //            [camera unlockForConfiguration];
-            
             return camera;
         }
     }
@@ -1400,7 +1396,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     
     //将UI坐标转化为摄像头坐标
     CGPoint cameraPoint = [self.captureVideoPreviewLayer captureDevicePointOfInterestForPoint:point];
-    [self focusWithMode:AVCaptureFocusModeAutoFocus exposureMode:AVCaptureExposureModeAutoExpose atPoint:cameraPoint];
+    [self focusWithPoint:cameraPoint];
     
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:1.0 animations:^{
@@ -1420,21 +1416,23 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
  *
  *  @param point 聚焦点
  */
--(void)focusWithMode:(AVCaptureFocusMode)focusMode exposureMode:(AVCaptureExposureMode)exposureMode atPoint:(CGPoint)point
+-(void)focusWithPoint:(CGPoint)point
 {
     [self changeDeviceProperty:^(AVCaptureDevice *captureDevice)
      {
-         if ([captureDevice isFocusModeSupported:focusMode])
+         // 聚焦
+         if ([captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus])
          {
-             [captureDevice setFocusMode:AVCaptureFocusModeAutoFocus];
+             [captureDevice setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
          }
          if ([captureDevice isFocusPointOfInterestSupported])
          {
              [captureDevice setFocusPointOfInterest:point];
          }
-         if ([captureDevice isExposureModeSupported:exposureMode])
+         // 曝光
+         if ([captureDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure])
          {
-             [captureDevice setExposureMode:AVCaptureExposureModeAutoExpose];
+             [captureDevice setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
          }
          if ([captureDevice isExposurePointOfInterestSupported])
          {
