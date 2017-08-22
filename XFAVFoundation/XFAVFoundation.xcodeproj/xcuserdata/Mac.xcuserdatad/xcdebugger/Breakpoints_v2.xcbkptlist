@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XFAVFoundation/XFAVFoundation/XFCameraController.m"
-            timestampString = "524048923.993294"
+            timestampString = "525086024.134778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "382"
-            endingLineNumber = "382"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "-setupVideo"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XFAVFoundation/XFAVFoundation/XFCameraController.m"
-            timestampString = "524124974.33055"
+            timestampString = "525086024.134778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1399"
-            endingLineNumber = "1399"
+            startingLineNumber = "1449"
+            endingLineNumber = "1449"
             landmarkName = "-setFocusCursorWithPoint:"
             landmarkType = "7">
          </BreakpointContent>

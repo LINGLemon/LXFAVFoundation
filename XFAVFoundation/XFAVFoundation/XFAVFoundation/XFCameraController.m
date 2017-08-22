@@ -67,6 +67,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 // 拍照摄像后的预览模块
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (strong, nonatomic) UIView *photoPreviewContainerView;                         //相片预览ContainerView
 @property (strong, nonatomic) UIImageView *photoPreviewImageView;                        //相片预览ImageView
 @property (strong, nonatomic) UIView *videoPreviewContainerView;                         //视频预览View
 @property (strong, nonatomic) NSURL *videoURL;                                           //视频文件地址
@@ -242,7 +243,9 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     __weak typeof(self) weakSelf = self;
     if (self.photoPreviewImageView)
     {
-        [XFPhotoLibraryManager savePhotoWithImage:self.photoPreviewImageView.image andAssetCollectionName:self.assetCollectionName withCompletion:^(UIImage *image, NSError *error) {
+        UIImage *finalImage = [self cutImageWithView:self.photoPreviewImageView];
+        
+        [XFPhotoLibraryManager savePhotoWithImage:finalImage andAssetCollectionName:self.assetCollectionName withCompletion:^(UIImage *image, NSError *error) {
             
             if (self.takePhotosCompletionBlock)
             {
@@ -505,7 +508,9 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     if (self.photoPreviewImageView)
     {
         [self.photoPreviewImageView removeFromSuperview];
+        [self.photoPreviewContainerView removeFromSuperview];
         self.photoPreviewImageView = nil;
+        self.photoPreviewContainerView = nil;
     }
     if (self.videoPreviewContainerView)
     {
@@ -661,19 +666,64 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
  */
 - (void)previewPhotoWithImage:(UIImage *)image
 {
+    [self stopUpdateAccelerometer];
+    
     [self.cameraButton setHidden:YES];
     [self.closeButton setHidden:YES];
     [self.rotateCameraButton setHidden:YES];
     
-    self.photoPreviewImageView = [[UIImageView alloc] initWithImage:image];
-    self.photoPreviewImageView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    UIImage *finalImage = nil;
+    if (self.shootingOrientation == UIDeviceOrientationLandscapeRight)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationDown];
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationLandscapeLeft)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationUp];
+    }
+    else if (self.shootingOrientation == UIDeviceOrientationPortraitUpsideDown)
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationLeft];
+    }
+    else
+    {
+        finalImage = [self rotateImage:image withOrientation:UIImageOrientationRight];
+    }
     
-    [self.view addSubview:self.photoPreviewImageView];
+    self.photoPreviewImageView = [[UIImageView alloc] init];
+    float videoRatio = finalImage.size.width / finalImage.size.height;
+    float screenRatio = kScreenWidth / kScreenHeight;
+    if (videoRatio > screenRatio)
+    {
+        CGFloat height = kScreenWidth * videoRatio;
+        CGFloat y = (kScreenHeight - height) / 2;
+        [self.photoPreviewImageView setFrame:CGRectMake(0, y, kScreenWidth, height)];
+    }
+    else
+    {
+        [self.photoPreviewImageView setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    }
+    self.photoPreviewImageView.image = finalImage;
+    
+    self.photoPreviewContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    self.photoPreviewContainerView.backgroundColor = [UIColor blackColor];
+    [self.photoPreviewContainerView addSubview:self.photoPreviewImageView];
+    [self.view addSubview:self.photoPreviewContainerView];
     [self.view bringSubviewToFront:self.photoPreviewImageView];
     [self.view bringSubviewToFront:self.cancelButton];
     [self.view bringSubviewToFront:self.confirmButton];
     [self.cancelButton setHidden:NO];
     [self.confirmButton setHidden:NO];
+}
+
+- (UIImage *)cutImageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, 0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 #pragma mark - 视频录制
