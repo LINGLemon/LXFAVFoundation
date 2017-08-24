@@ -15,8 +15,6 @@
 		048FF3BC1EF7D114003BF979 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048FF3BA1EF7D114003BF979 /* LaunchScreen.storyboard */; };
 		048FF3C71EF7D114003BF979 /* XFAVFoundationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3C61EF7D114003BF979 /* XFAVFoundationTests.m */; };
 		048FF3D21EF7D114003BF979 /* XFAVFoundationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3D11EF7D114003BF979 /* XFAVFoundationUITests.m */; };
-		048FF4031EF7EF82003BF979 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3F71EF7EF82003BF979 /* NSString+Hash.m */; };
-		048FF4041EF7EF82003BF979 /* RAFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3F91EF7EF82003BF979 /* RAFileManager.m */; };
 		048FF4051EF7EF82003BF979 /* XFCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3FC1EF7EF82003BF979 /* XFCameraButton.m */; };
 		048FF4061EF7EF82003BF979 /* XFCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF3FE1EF7EF82003BF979 /* XFCameraController.m */; };
 		048FF4071EF7EF82003BF979 /* XFCameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048FF3FF1EF7EF82003BF979 /* XFCameraController.xib */; };
@@ -337,11 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048FF4041EF7EF82003BF979 /* RAFileManager.m in Sources */,
 				048FF3B41EF7D114003BF979 /* ViewController.m in Sources */,
 				048FF4081EF7EF82003BF979 /* XFPhotoLibraryManager.m in Sources */,
 				048FF4051EF7EF82003BF979 /* XFCameraButton.m in Sources */,
-				048FF4031EF7EF82003BF979 /* NSString+Hash.m in Sources */,
 				048FF3B11EF7D114003BF979 /* AppDelegate.m in Sources */,
 				048FF3AE1EF7D114003BF979 /* main.m in Sources */,
 				048FF4061EF7EF82003BF979 /* XFCameraController.m in Sources */,
