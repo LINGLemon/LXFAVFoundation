@@ -333,7 +333,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 {
     if (!_videoQueue)
     {
-        _videoQueue = dispatch_queue_create("QXCameraController", DISPATCH_QUEUE_SERIAL);
+        _videoQueue = dispatch_get_main_queue();
     }
     
     return _videoQueue;
@@ -692,8 +692,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     
     self.photoPreviewImageView = [[UIImageView alloc] init];
     float videoRatio = finalImage.size.width / finalImage.size.height;
-    float screenRatio = kScreenWidth / kScreenHeight;
-    if (videoRatio > screenRatio)
+    if (self.shootingOrientation == UIDeviceOrientationLandscapeRight || self.shootingOrientation == UIDeviceOrientationLandscapeLeft)
     {
         CGFloat height = kScreenWidth * videoRatio;
         CGFloat y = (kScreenHeight - height) / 2;
@@ -804,14 +803,14 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     __weak __typeof(self)weakSelf = self;
     if(_assetWriter && _assetWriter.status == AVAssetWriterStatusWriting)
     {
-        dispatch_async(self.videoQueue, ^{
+//        dispatch_async(self.videoQueue, ^{
             [_assetWriter finishWritingWithCompletionHandler:^{
                 weakSelf.canWrite = NO;
                 weakSelf.assetWriter = nil;
                 weakSelf.assetWriterAudioInput = nil;
                 weakSelf.assetWriterVideoInput = nil;
             }];
-        });
+//        });
     }
     
     if (timeLength < VIDEO_RECORDER_MIN_TIME)
@@ -1340,8 +1339,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         return;
     }
     
-    CFRetain(sampleBuffer);
-    dispatch_async(self.videoQueue, ^{
+//    CFRetain(sampleBuffer);
+//    dispatch_async(self.videoQueue, ^{
         @autoreleasepool
         {
             if (!self.canWrite && mediaType == AVMediaTypeVideo)
@@ -1383,9 +1382,9 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                 }
             }
             
-            CFRelease(sampleBuffer);
+//            CFRelease(sampleBuffer);
         }
-    });
+//    });
 }
 
 #pragma mark - 摄像头聚焦，与缩放
