@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XFAVFoundation/XFAVFoundation/XFCameraController.m"
-            timestampString = "526267663.678042"
+            timestampString = "526293749.290699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1448"
-            endingLineNumber = "1448"
+            startingLineNumber = "1455"
+            endingLineNumber = "1455"
             landmarkName = "-setFocusCursorWithPoint:"
             landmarkType = "7">
          </BreakpointContent>

@@ -519,6 +519,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         self.playerItem = nil;
         [self.playerLayer removeFromSuperlayer];
         self.playerLayer = nil;
+        self.cameraButton.progressPercentage = 0.0f;
         [self.videoPreviewContainerView removeFromSuperview];
         self.videoPreviewContainerView = nil;
         [[NSFileManager defaultManager] removeItemAtURL:self.videoURL error:nil];
@@ -795,37 +796,43 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
  */
 - (void)stopVideoRecorder
 {
-    self.cameraButton.progressPercentage = 0.0f;
-    [self.cameraButton stopShootAnimation];
-    _isShooting = NO;
-    [self timerStop];
-    
-    __weak __typeof(self)weakSelf = self;
-    if(_assetWriter && _assetWriter.status == AVAssetWriterStatusWriting)
+    if (_isShooting)
     {
-//        dispatch_async(self.videoQueue, ^{
+        _isShooting = NO;
+        self.cameraButton.progressPercentage = 0.0f;
+        [self.cameraButton stopShootAnimation];
+        [self timerStop];
+        
+        __weak __typeof(self)weakSelf = self;
+        if(_assetWriter && _assetWriter.status == AVAssetWriterStatusWriting)
+        {
+            //        dispatch_async(self.videoQueue, ^{
             [_assetWriter finishWritingWithCompletionHandler:^{
                 weakSelf.canWrite = NO;
                 weakSelf.assetWriter = nil;
                 weakSelf.assetWriterAudioInput = nil;
                 weakSelf.assetWriterVideoInput = nil;
             }];
-//        });
+            //        });
+        }
+        
+        if (timeLength < VIDEO_RECORDER_MIN_TIME)
+        {
+            return;
+        }
+        
+        [self.cameraButton setHidden:YES];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [weakSelf previewVideoAfterShoot];
+            
+        });
     }
-    
-    if (timeLength < VIDEO_RECORDER_MIN_TIME)
+    else
     {
-        return;
+        // nothing
     }
-    
-    [self.cameraButton setHidden:YES];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [weakSelf previewVideoAfterShoot];
-        
-    });
-    
 }
 
 /**
