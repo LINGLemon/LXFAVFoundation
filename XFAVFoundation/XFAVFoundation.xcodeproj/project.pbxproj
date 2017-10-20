@@ -55,10 +55,6 @@
 		048FF3CD1EF7D114003BF979 /* XFAVFoundationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XFAVFoundationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FF3D11EF7D114003BF979 /* XFAVFoundationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFAVFoundationUITests.m; sourceTree = "<group>"; };
 		048FF3D31EF7D114003BF979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		048FF3F61EF7EF82003BF979 /* NSString+Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hash.h"; sourceTree = "<group>"; };
-		048FF3F71EF7EF82003BF979 /* NSString+Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hash.m"; sourceTree = "<group>"; };
-		048FF3F81EF7EF82003BF979 /* RAFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAFileManager.h; sourceTree = "<group>"; };
-		048FF3F91EF7EF82003BF979 /* RAFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAFileManager.m; sourceTree = "<group>"; };
 		048FF3FB1EF7EF82003BF979 /* XFCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFCameraButton.h; sourceTree = "<group>"; };
 		048FF3FC1EF7EF82003BF979 /* XFCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFCameraButton.m; sourceTree = "<group>"; };
 		048FF3FD1EF7EF82003BF979 /* XFCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFCameraController.h; sourceTree = "<group>"; };
@@ -160,24 +156,12 @@
 		048FF3F41EF7EF82003BF979 /* XFAVFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				048FF3F51EF7EF82003BF979 /* FileManager */,
 				048FF3FA1EF7EF82003BF979 /* XFCameraButton */,
 				048FF3FD1EF7EF82003BF979 /* XFCameraController.h */,
 				048FF3FE1EF7EF82003BF979 /* XFCameraController.m */,
 				048FF3FF1EF7EF82003BF979 /* XFCameraController.xib */,
 			);
 			path = XFAVFoundation;
-			sourceTree = "<group>";
-		};
-		048FF3F51EF7EF82003BF979 /* FileManager */ = {
-			isa = PBXGroup;
-			children = (
-				048FF3F61EF7EF82003BF979 /* NSString+Hash.h */,
-				048FF3F71EF7EF82003BF979 /* NSString+Hash.m */,
-				048FF3F81EF7EF82003BF979 /* RAFileManager.h */,
-				048FF3F91EF7EF82003BF979 /* RAFileManager.m */,
-			);
-			path = FileManager;
 			sourceTree = "<group>";
 		};
 		048FF3FA1EF7EF82003BF979 /* XFCameraButton */ = {
