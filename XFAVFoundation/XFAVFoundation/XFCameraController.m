@@ -977,7 +977,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 /**
  *  创建文件名
  *
- *  @prama type 文件名类型
+ *  @parma type 文件名类型
  */
 - (NSString *)createFileNamePrefix
 {
