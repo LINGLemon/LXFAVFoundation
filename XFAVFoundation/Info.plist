@@ -21,13 +21,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>App需要您的同意才能读取媒体资料库</string>
+	<string>若不允许，您将无法保存图片、视频到本地相册</string>
 	<key>NSCameraUsageDescription</key>
-	<string>App需要您的同意才能访问相机</string>
+	<string>若不允许，您将无法使用拍照、录制视频等功能</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>App需要您的同意才能访问麦克风</string>
+	<string>若不允许，您将无法使用录制视频等功能</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App需要您的同意才能读取相册</string>
+	<string>若不允许，您将无法保存图片、视频到本地相册</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -49,5 +49,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -249,7 +249,7 @@
 				TargetAttributes = {
 					048FF3A81EF7D114003BF979 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = Y6RTP7B9HD;
+						DevelopmentTeam = 7DQP5893FJ;
 						ProvisioningStyle = Automatic;
 					};
 					048FF3C11EF7D114003BF979 = {
@@ -475,11 +475,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y6RTP7B9HD;
+				DEVELOPMENT_TEAM = 7DQP5893FJ;
 				INFOPLIST_FILE = XFAVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = XF.XFAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lxf.XFAVFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -488,11 +488,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y6RTP7B9HD;
+				DEVELOPMENT_TEAM = 7DQP5893FJ;
 				INFOPLIST_FILE = XFAVFoundation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = XF.XFAVFoundation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lxf.XFAVFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -16,6 +16,7 @@
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define SafeViewBottomHeight (kScreenHeight == 812.0 ? 34.0 : 0.0)
 #define VIDEO_FILEPATH                                              @"video"
 #define TIMER_INTERVAL 0.01f                                        //定时器记录视频间隔
 #define VIDEO_RECORDER_MAX_TIME 10.0f                               //视频最大时长 (单位/秒)
@@ -103,7 +104,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [super viewDidLoad];
     
     // 隐藏状态栏
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [UIApplication sharedApplication].statusBarHidden = YES;
     
     _isFocusing = NO;
     _isShooting = NO;
@@ -158,7 +160,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
     
     // 显示状态栏
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -545,7 +548,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         
         [self.view addSubview:cameraButton];
         CGFloat cameraBtnX = (kScreenWidth - cameraButton.bounds.size.width) / 2;
-        CGFloat cameraBtnY = kScreenHeight - cameraButton.bounds.size.height - 60;    //距离底部60
+        CGFloat cameraBtnY = kScreenHeight - cameraButton.bounds.size.height - 60 - SafeViewBottomHeight;    //距离底部60
         cameraButton.frame = CGRectMake(cameraBtnX, cameraBtnY, cameraButton.bounds.size.width, cameraButton.bounds.size.height);
         [self.view bringSubviewToFront:cameraButton];
         
