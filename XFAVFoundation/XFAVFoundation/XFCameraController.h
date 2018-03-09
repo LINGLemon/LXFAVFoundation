@@ -8,7 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  拍照完成后的Block回调
+ *
+ *  @param image 拍照后返回的image
+ */
 typedef void(^TakePhotosCompletionBlock)(UIImage *image, NSError *error);
+
+/**
+ *  拍摄完成后的Block回调
+ *
+ *  @param videoUrl 拍摄后返回的小视频地址
+ *  @param videoTimeLength 小视频时长
+ *  @param thumbnailImage 小视频缩略图
+ */
 typedef void(^ShootCompletionBlock)(NSURL *videoUrl, CGFloat videoTimeLength, UIImage *thumbnailImage, NSError *error);
 
 @interface XFCameraController : UIViewController
