@@ -1576,9 +1576,10 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
          {
              double x = accelerometerData.acceleration.x;
              double y = accelerometerData.acceleration.y;
-             if (fabs(y) >= fabs(x))
+             if ((fabs(y) + 0.1f) >= fabs(x))
              {
-                 if (y >= 0)
+//                 NSLog(@"y:%lf", y);
+                 if (y >= 0.1f)
                  {
                      // Down
                      NSLog(@"Down");
@@ -1593,17 +1594,24 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
              }
              else
              {
-                 if (x >= 0)
+//                 NSLog(@"x:%lf", x);
+                 if (x >= 0.1f)
                  {
                      // Right
                      NSLog(@"Right");
                      _shootingOrientation = UIDeviceOrientationLandscapeRight;
                  }
-                 else
+                 else if (x <= 0.1f)
                  {
                      // Left
                      NSLog(@"Left");
                      _shootingOrientation = UIDeviceOrientationLandscapeLeft;
+                 }
+                 else
+                 {
+                     // Portrait
+                     NSLog(@"Portrait");
+                     _shootingOrientation = UIDeviceOrientationPortrait;
                  }
              }
          }];
