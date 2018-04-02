@@ -336,7 +336,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 {
     if (!_videoQueue)
     {
-        _videoQueue = dispatch_get_main_queue();
+        _videoQueue = dispatch_queue_create("XFCameraController", DISPATCH_QUEUE_SERIAL); // dispatch_get_main_queue();
     }
     
     return _videoQueue;
@@ -979,8 +979,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 
 /**
  *  创建文件名
- *
- *  @param type 文件名类型
  */
 - (NSString *)createFileNamePrefix
 {
