@@ -17,6 +17,7 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define SafeViewBottomHeight (kScreenHeight == 812.0 ? 34.0 : 0.0)
+#define iSiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define VIDEO_FILEPATH                                              @"video"
 #define TIMER_INTERVAL 0.01f                                        //定时器记录视频间隔
 #define VIDEO_RECORDER_MAX_TIME 10.0f                               //视频最大时长 (单位/秒)
@@ -104,7 +105,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [super viewDidLoad];
     
     // 隐藏状态栏
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [UIApplication sharedApplication].statusBarHidden = YES;
     
     _isFocusing = NO;
@@ -160,7 +161,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
     
     // 显示状态栏
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
@@ -444,6 +445,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 {
     self.captureStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = @{
+                                     //                                     AVVideoScalingModeKey:AVVideoScalingModeResizeAspect,
                                      AVVideoCodecKey:AVVideoCodecJPEG
                                      };
     [_captureStillImageOutput setOutputSettings:outputSettings];
@@ -693,9 +695,11 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     {
         finalImage = [self rotateImage:image withOrientation:UIImageOrientationRight];
     }
+//    NSLog(@"image %@",NSStringFromCGSize(image.size));
+//    NSLog(@"finalImage %@",NSStringFromCGSize(finalImage.size));
     
     self.photoPreviewImageView = [[UIImageView alloc] init];
-    float videoRatio = finalImage.size.width / finalImage.size.height;
+    float videoRatio = finalImage.size.width / finalImage.size.height; //得到的图片 高/宽
     if (self.shootingOrientation == UIDeviceOrientationLandscapeRight || self.shootingOrientation == UIDeviceOrientationLandscapeLeft)
     {
         CGFloat height = kScreenWidth * videoRatio;
@@ -704,7 +708,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     }
     else
     {
-        [self.photoPreviewImageView setFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        [self.photoPreviewImageView setFrame:CGRectMake(0, 0, kScreenWidth, kScreenWidth*videoRatio)];
     }
     self.photoPreviewImageView.image = finalImage;
     
@@ -712,6 +716,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     self.photoPreviewContainerView.backgroundColor = [UIColor blackColor];
     [self.photoPreviewContainerView addSubview:self.photoPreviewImageView];
     [self.view addSubview:self.photoPreviewContainerView];
+    self.photoPreviewImageView.center = self.view.center;
     [self.view bringSubviewToFront:self.photoPreviewImageView];
     [self.view bringSubviewToFront:self.cancelButton];
     [self.view bringSubviewToFront:self.confirmButton];
@@ -851,6 +856,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     self.assetWriter = [AVAssetWriter assetWriterWithURL:self.videoURL fileType:AVFileTypeMPEG4 error:nil];
     //写入视频大小
     NSInteger numPixels = kScreenWidth * kScreenHeight;
+    
     //每像素比特
     CGFloat bitsPerPixel = 12.0;
     NSInteger bitsPerSecond = numPixels * bitsPerPixel;
@@ -860,12 +866,18 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                                              AVVideoExpectedSourceFrameRateKey : @(15),
                                              AVVideoMaxKeyFrameIntervalKey : @(15),
                                              AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel };
-    
+    CGFloat width = kScreenHeight;
+    CGFloat height = kScreenWidth;
+    if (iSiPhoneX)
+    {
+        width = kScreenHeight - 146;
+        height = kScreenWidth;
+    }
     //视频属性
     self.videoCompressionSettings = @{ AVVideoCodecKey : AVVideoCodecH264,
+                                       AVVideoWidthKey : @(width * 2),
+                                       AVVideoHeightKey : @(height * 2),
                                        AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill,
-                                       AVVideoWidthKey : @(kScreenHeight * 2),
-                                       AVVideoHeightKey : @(kScreenWidth * 2),
                                        AVVideoCompressionPropertiesKey : compressionProperties };
     
     _assetWriterVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:self.videoCompressionSettings];
@@ -1066,6 +1078,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     self.playerLayer.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     
     [self.videoPreviewContainerView.layer addSublayer:self.playerLayer];
@@ -1578,7 +1591,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
              double y = accelerometerData.acceleration.y;
              if ((fabs(y) + 0.1f) >= fabs(x))
              {
-//                 NSLog(@"y:%lf", y);
+                 //                 NSLog(@"y:%lf", y);
                  if (y >= 0.1f)
                  {
                      // Down
@@ -1594,7 +1607,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
              }
              else
              {
-//                 NSLog(@"x:%lf", x);
+                 //                 NSLog(@"x:%lf", x);
                  if (x >= 0.1f)
                  {
                      // Right
@@ -1753,17 +1766,3 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
