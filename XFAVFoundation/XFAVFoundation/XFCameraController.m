@@ -814,14 +814,14 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         __weak __typeof(self)weakSelf = self;
         if(_assetWriter && _assetWriter.status == AVAssetWriterStatusWriting)
         {
-            dispatch_async(self.videoQueue, ^{
+//            dispatch_async(self.videoQueue, ^{
                 [_assetWriter finishWritingWithCompletionHandler:^{
                     weakSelf.canWrite = NO;
                     weakSelf.assetWriter = nil;
                     weakSelf.assetWriterAudioInput = nil;
                     weakSelf.assetWriterVideoInput = nil;
                 }];
-            });
+//            });
         }
         
         if (timeLength < VIDEO_RECORDER_MIN_TIME)
@@ -1360,8 +1360,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
         return;
     }
     
-    CFRetain(sampleBuffer);
-    dispatch_async(self.videoQueue, ^{
+//    CFRetain(sampleBuffer);
+//    dispatch_async(self.videoQueue, ^{
         @autoreleasepool
         {
             if (!self.canWrite && mediaType == AVMediaTypeVideo)
@@ -1402,9 +1402,9 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                     }
                 }
             }
-            CFRelease(sampleBuffer);
+//            CFRelease(sampleBuffer);
         }
-    });
+//    });
 }
 
 #pragma mark - 摄像头聚焦，与缩放
