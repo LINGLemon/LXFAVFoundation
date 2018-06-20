@@ -19,10 +19,11 @@
 #define SafeViewBottomHeight (kScreenHeight == 812.0 ? 34.0 : 0.0)
 #define iSiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define VIDEO_FILEPATH                                              @"video"
-#define TIMER_INTERVAL 0.01f                                        //定时器记录视频间隔
-#define VIDEO_RECORDER_MAX_TIME 10.0f                               //视频最大时长 (单位/秒)
-#define VIDEO_RECORDER_MIN_TIME 1.0f                                //最短视频时长 (单位/秒)
-#define START_VIDEO_ANIMATION_DURATION 0.3f                         //录制视频前的动画时间
+#define TIMER_INTERVAL 0.01f                                        // 定时器记录视频间隔
+#define VIDEO_RECORDER_MAX_TIME 10.0f                               // 视频最大时长 (单位/秒)
+#define VIDEO_RECORDER_MIN_TIME 1.0f                                // 最短视频时长 (单位/秒)
+#define START_VIDEO_ANIMATION_DURATION 0.3f                         // 录制视频前的动画时间
+#define DEFAULT_VIDEO_ZOOM_FACTOR 3.0f                              // 默认放大倍数
 
 typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 
@@ -157,8 +158,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
     
     // 显示状态栏
     //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
@@ -568,8 +567,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self.cameraButton setHidden:NO];
     [self.view bringSubviewToFront:self.cameraButton];
     
-    [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
-    
     // 对焦imageView
     [self.view bringSubviewToFront:self.focusImageView];
     [self.focusImageView setAlpha:0];
@@ -653,7 +650,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     //根据设备输出获得连接
     AVCaptureConnection *captureConnection = [self.captureStillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     
-    [captureConnection setVideoScaleAndCropFactor:self.effectiveScale];
+//    [captureConnection setVideoScaleAndCropFactor:self.effectiveScale];
     
     //根据连接取得设备输出的数据
     [self.captureStillImageOutput captureStillImageAsynchronouslyFromConnection:captureConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
@@ -781,8 +778,6 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     _isShooting = YES;
     
     [self stopUpdateAccelerometer];
-    
-    [self setCaptureVideoPreviewLayerTransformWithScale:1.0f];
     
     [self.cameraButton startShootAnimationWithDuration:START_VIDEO_ANIMATION_DURATION];
     
@@ -1533,33 +1528,20 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     
     if (allTouchesAreOnTheCaptureVideoPreviewLayer)
     {
-        self.effectiveScale = self.beginGestureScale * recognizer.scale;
-        if (self.effectiveScale < 1.0f)
+        CGFloat videoMaxZoomFactor = self.videoInput.device.activeFormat.videoMaxZoomFactor;
+        CGFloat maxScaleAndCropFactor = videoMaxZoomFactor<DEFAULT_VIDEO_ZOOM_FACTOR?videoMaxZoomFactor:DEFAULT_VIDEO_ZOOM_FACTOR;
+        CGFloat currentScale = self.beginGestureScale * recognizer.scale;
+        if ((currentScale > 1.0f) && (currentScale < maxScaleAndCropFactor))
         {
-            self.effectiveScale = 1.0f;
+            self.effectiveScale = self.beginGestureScale * recognizer.scale;
+            if ((self.effectiveScale < videoMaxZoomFactor) && (self.effectiveScale > 1.0f))
+            {
+                [self changeDeviceProperty:^(AVCaptureDevice *captureDevice) {
+                    [captureDevice rampToVideoZoomFactor:self.effectiveScale withRate:10.0f];
+                }];
+            }
         }
-        
-        //        NSLog(@"%f-------------->%f------------recognizerScale%f", self.effectiveScale, self.beginGestureScale, recognizer.scale);
-        
-        CGFloat imageMaxScaleAndCropFactor = [[self.captureStillImageOutput connectionWithMediaType:AVMediaTypeVideo] videoMaxScaleAndCropFactor];
-        
-        //        NSLog(@"%f", imageMaxScaleAndCropFactor);
-        if (self.effectiveScale > imageMaxScaleAndCropFactor)
-        {
-            self.effectiveScale = imageMaxScaleAndCropFactor;
-        }
-        
-        [self setCaptureVideoPreviewLayerTransformWithScale:self.effectiveScale];
     }
-}
-
-- (void)setCaptureVideoPreviewLayerTransformWithScale:(CGFloat)scale
-{
-    self.effectiveScale = scale;
-    [CATransaction begin];
-    [CATransaction setAnimationDuration:0.25f];      //时长最好低于 START_VIDEO_ANIMATION_DURATION
-    [self.captureVideoPreviewLayer setAffineTransform:CGAffineTransformMakeScale(scale, scale)];
-    [CATransaction commit];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
