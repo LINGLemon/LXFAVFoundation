@@ -1221,7 +1221,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     //获取视频总时长
     Float64 duration = CMTimeGetSeconds(asset.duration);
     
-    if (duration > 10)
+    if (duration > VIDEO_RECORDER_MAX_TIME)
     {
         duration = VIDEO_RECORDER_MAX_TIME;
     }
