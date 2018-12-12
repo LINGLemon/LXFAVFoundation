@@ -1658,8 +1658,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
             if ([[UIApplication sharedApplication] canOpenURL:url])
             {
                 [[UIApplication sharedApplication] openURL:url];
-                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }];
         
         [alertController addAction:okAction];
@@ -1692,8 +1692,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
             if ([[UIApplication sharedApplication] canOpenURL:url])
             {
                 [[UIApplication sharedApplication] openURL:url];
-                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }];
         
         [alertController addAction:okAction];
@@ -1734,8 +1734,8 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                 if ([[UIApplication sharedApplication] canOpenURL:url])
                 {
                     [[UIApplication sharedApplication] openURL:url];
-                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                 }
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
             }];
             
             [alertController addAction:okAction];
