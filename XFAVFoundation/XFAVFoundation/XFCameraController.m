@@ -1741,7 +1741,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
             [alertController addAction:okAction];
             [alertController addAction:setAction];
             
-            [self presentViewController:alertController animated:YES completion:nil];
+            [weakSelf presentViewController:alertController animated:YES completion:nil];
             
         }
     }];
