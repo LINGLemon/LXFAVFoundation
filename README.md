@@ -11,11 +11,17 @@ http://blog.csdn.net/sinat_31177681/article/details/75252341
 
 2、上调了帧率和像素，10s的视频2.8m左右
 详细参数设置如下：
+    
     self.assetWriter = [AVAssetWriter assetWriterWithURL:self.videoURL fileType:AVFileTypeMPEG4 error:nil];
+    
     //写入视频大小
+    
     NSInteger numPixels = kScreenWidth * kScreenHeight;
+    
     //每像素比特
+    
     CGFloat bitsPerPixel = 12.0;
+    
     NSInteger bitsPerSecond = numPixels * bitsPerPixel;
     
     // 码率和帧率设置
