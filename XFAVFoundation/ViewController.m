@@ -44,6 +44,7 @@
         [weakCameraController dismissViewControllerAnimated:YES completion:nil];
     };
     
+    cameraController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:cameraController animated:YES completion:nil];
     
 }
