@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEB210792639616500793DE5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB210782639616500793DE5 /* AppDelegate.m */; };
+		BEB2107C2639616500793DE5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2107B2639616500793DE5 /* SceneDelegate.m */; };
+		BEB2107F2639616500793DE5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2107E2639616500793DE5 /* ViewController.m */; };
+		BEB210822639616500793DE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB210802639616500793DE5 /* Main.storyboard */; };
+		BEB210842639616A00793DE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEB210832639616A00793DE5 /* Assets.xcassets */; };
+		BEB210872639616A00793DE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEB210852639616A00793DE5 /* LaunchScreen.storyboard */; };
+		BEB2108A2639616A00793DE5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB210892639616A00793DE5 /* main.m */; };
+		BEB2109A263961B400793DE5 /* LXFPhotoLibraryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB21091263961B300793DE5 /* LXFPhotoLibraryManager.m */; };
+		BEB2109B263961B400793DE5 /* LXFCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB21095263961B300793DE5 /* LXFCameraButton.m */; };
+		BEB2109C263961B400793DE5 /* LXFCameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB21097263961B300793DE5 /* LXFCameraController.m */; };
+		BEB2109D263961B400793DE5 /* LXFCameraController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB21098263961B400793DE5 /* LXFCameraController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BEB210742639616500793DE5 /* LXFAVFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXFAVFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEB210772639616500793DE5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BEB210782639616500793DE5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BEB2107A2639616500793DE5 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		BEB2107B2639616500793DE5 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		BEB2107D2639616500793DE5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BEB2107E2639616500793DE5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BEB210812639616500793DE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BEB210832639616A00793DE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BEB210862639616A00793DE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BEB210882639616A00793DE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEB210892639616A00793DE5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BEB21091263961B300793DE5 /* LXFPhotoLibraryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXFPhotoLibraryManager.m; sourceTree = "<group>"; };
+		BEB21092263961B300793DE5 /* LXFPhotoLibraryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXFPhotoLibraryManager.h; sourceTree = "<group>"; };
+		BEB21095263961B300793DE5 /* LXFCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXFCameraButton.m; sourceTree = "<group>"; };
+		BEB21096263961B300793DE5 /* LXFCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXFCameraButton.h; sourceTree = "<group>"; };
+		BEB21097263961B300793DE5 /* LXFCameraController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXFCameraController.m; sourceTree = "<group>"; };
+		BEB21098263961B400793DE5 /* LXFCameraController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXFCameraController.xib; sourceTree = "<group>"; };
+		BEB21099263961B400793DE5 /* LXFCameraController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXFCameraController.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEB210712639616500793DE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEB2106B2639616500793DE5 = {
+			isa = PBXGroup;
+			children = (
+				BEB210762639616500793DE5 /* LXFAVFoundation */,
+				BEB210752639616500793DE5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEB210752639616500793DE5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEB210742639616500793DE5 /* LXFAVFoundation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEB210762639616500793DE5 /* LXFAVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				BEB21093263961B300793DE5 /* LXFAVFoundation */,
+				BEB21090263961B300793DE5 /* LXFPhotoLibraryManager */,
+				BEB210772639616500793DE5 /* AppDelegate.h */,
+				BEB210782639616500793DE5 /* AppDelegate.m */,
+				BEB2107A2639616500793DE5 /* SceneDelegate.h */,
+				BEB2107B2639616500793DE5 /* SceneDelegate.m */,
+				BEB2107D2639616500793DE5 /* ViewController.h */,
+				BEB2107E2639616500793DE5 /* ViewController.m */,
+				BEB210802639616500793DE5 /* Main.storyboard */,
+				BEB210832639616A00793DE5 /* Assets.xcassets */,
+				BEB210852639616A00793DE5 /* LaunchScreen.storyboard */,
+				BEB210882639616A00793DE5 /* Info.plist */,
+				BEB210892639616A00793DE5 /* main.m */,
+			);
+			path = LXFAVFoundation;
+			sourceTree = "<group>";
+		};
+		BEB21090263961B300793DE5 /* LXFPhotoLibraryManager */ = {
+			isa = PBXGroup;
+			children = (
+				BEB21092263961B300793DE5 /* LXFPhotoLibraryManager.h */,
+				BEB21091263961B300793DE5 /* LXFPhotoLibraryManager.m */,
+			);
+			path = LXFPhotoLibraryManager;
+			sourceTree = "<group>";
+		};
+		BEB21093263961B300793DE5 /* LXFAVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				BEB21094263961B300793DE5 /* LXFCameraButton */,
+				BEB21099263961B400793DE5 /* LXFCameraController.h */,
+				BEB21097263961B300793DE5 /* LXFCameraController.m */,
+				BEB21098263961B400793DE5 /* LXFCameraController.xib */,
+			);
+			path = LXFAVFoundation;
+			sourceTree = "<group>";
+		};
+		BEB21094263961B300793DE5 /* LXFCameraButton */ = {
+			isa = PBXGroup;
+			children = (
+				BEB21096263961B300793DE5 /* LXFCameraButton.h */,
+				BEB21095263961B300793DE5 /* LXFCameraButton.m */,
+			);
+			path = LXFCameraButton;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEB210732639616500793DE5 /* LXFAVFoundation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEB2108D2639616A00793DE5 /* Build configuration list for PBXNativeTarget "LXFAVFoundation" */;
+			buildPhases = (
+				BEB210702639616500793DE5 /* Sources */,
+				BEB210712639616500793DE5 /* Frameworks */,
+				BEB210722639616500793DE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LXFAVFoundation;
+			productName = LXFAVFoundation;
+			productReference = BEB210742639616500793DE5 /* LXFAVFoundation.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEB2106C2639616500793DE5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					BEB210732639616500793DE5 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+				};
+			};
+			buildConfigurationList = BEB2106F2639616500793DE5 /* Build configuration list for PBXProject "LXFAVFoundation" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BEB2106B2639616500793DE5;
+			productRefGroup = BEB210752639616500793DE5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEB210732639616500793DE5 /* LXFAVFoundation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEB210722639616500793DE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEB210872639616A00793DE5 /* LaunchScreen.storyboard in Resources */,
+				BEB210842639616A00793DE5 /* Assets.xcassets in Resources */,
+				BEB2109D263961B400793DE5 /* LXFCameraController.xib in Resources */,
+				BEB210822639616500793DE5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEB210702639616500793DE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEB2107F2639616500793DE5 /* ViewController.m in Sources */,
+				BEB2109A263961B400793DE5 /* LXFPhotoLibraryManager.m in Sources */,
+				BEB2109B263961B400793DE5 /* LXFCameraButton.m in Sources */,
+				BEB210792639616500793DE5 /* AppDelegate.m in Sources */,
+				BEB2108A2639616A00793DE5 /* main.m in Sources */,
+				BEB2107C2639616500793DE5 /* SceneDelegate.m in Sources */,
+				BEB2109C263961B400793DE5 /* LXFCameraController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BEB210802639616500793DE5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEB210812639616500793DE5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BEB210852639616A00793DE5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEB210862639616A00793DE5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEB2108B2639616A00793DE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BEB2108C2639616A00793DE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEB2108E2639616A00793DE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6RTP7B9HD;
+				INFOPLIST_FILE = LXFAVFoundation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lxf.LXFAVFoundation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEB2108F2639616A00793DE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y6RTP7B9HD;
+				INFOPLIST_FILE = LXFAVFoundation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lxf.LXFAVFoundation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEB2106F2639616500793DE5 /* Build configuration list for PBXProject "LXFAVFoundation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEB2108B2639616A00793DE5 /* Debug */,
+				BEB2108C2639616A00793DE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEB2108D2639616A00793DE5 /* Build configuration list for PBXNativeTarget "LXFAVFoundation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEB2108E2639616A00793DE5 /* Debug */,
+				BEB2108F2639616A00793DE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEB2106C2639616500793DE5 /* Project object */;
+}
