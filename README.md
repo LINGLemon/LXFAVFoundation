@@ -5,7 +5,7 @@
 http://blog.csdn.net/sinat_31177681/article/details/75252341
 
 
-1、优化系统权限相关的提示语，防止App Store审核不通过，针对iPhone X的视频，录制按钮上移
+1、优化系统权限相关的提示语，防止App Store审核不通过
 
 
 
