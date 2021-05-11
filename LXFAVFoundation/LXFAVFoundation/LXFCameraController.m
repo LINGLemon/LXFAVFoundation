@@ -17,7 +17,6 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define SafeViewBottomHeight (kScreenHeight == 812.0 ? 34.0 : 0.0)
-#define iSiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 #define VIDEO_FILEPATH                                              @"video"
 #define TIMER_INTERVAL 0.01f                                        // 定时器记录视频间隔
 #define VIDEO_RECORDER_MAX_TIME 10.0f                               // 视频最大时长 (单位/秒)
@@ -848,17 +847,12 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                                              AVVideoProfileLevelKey : AVVideoProfileLevelH264BaselineAutoLevel };
     CGFloat width = kScreenHeight;
     CGFloat height = kScreenWidth;
-    if (iSiPhoneX)
-    {
-        width = kScreenHeight - 146;
-        height = kScreenWidth;
-    }
     //视频属性
     if (@available(iOS 11.0, *)) {
         self.videoCompressionSettings = @{ AVVideoCodecKey : AVVideoCodecTypeH264,
                                            AVVideoWidthKey : @(width * 2),
                                            AVVideoHeightKey : @(height * 2),
-                                           AVVideoScalingModeKey : AVVideoScalingModeResizeAspectFill,
+                                           AVVideoScalingModeKey : AVVideoScalingModeResizeAspect,
                                            AVVideoCompressionPropertiesKey : compressionProperties };
     } else {
         // Fallback on earlier versions
@@ -1068,10 +1062,10 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     [self.videoPreviewContainerView.layer addSublayer:self.playerLayer];
     
     // 其余UI布局设置
-    [self.view addSubview:self.videoPreviewContainerView];
-    [self.view bringSubviewToFront:self.videoPreviewContainerView];
-    [self.view bringSubviewToFront:self.cancelButton];
-    [self.view bringSubviewToFront:self.confirmButton];
+    [self.viewContainer addSubview:self.videoPreviewContainerView];
+    [self.viewContainer bringSubviewToFront:self.videoPreviewContainerView];
+    [self.viewContainer bringSubviewToFront:self.cancelButton];
+    [self.viewContainer bringSubviewToFront:self.confirmButton];
     [self.cameraButton setHidden:YES];
     [self.closeButton setHidden:YES];
     [self.rotateCameraButton setHidden:YES];
